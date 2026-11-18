@@ -1,0 +1,81 @@
+﻿Állatorvosi Fogászati Kezelési Lap és Alkalmazás Terv
+Ez a dokumentum a kutyák és macskák fogászati kezelésére optimalizált digitális kezelési lap és alkalmazás részletes funkcionális tervét tartalmazza, magában foglalva a Triadan-rendszer szerinti fogjelölési logikát, a gyorsbeviteli panelt és a képernyő drótvázas (wireframe) elrendezését.
+1. Milyen adatok szerepeljenek a kezelési lapon? (Adatstruktúra)
+A) Páciens és vizit adatai (Fejléc)
+* Páciens adatai: Gazdi neve, állat neve, faj, fajta, kor, ivartalanítási státusz, testtömeg 
+* Anesztéziai státusz: ASA-státusz (I-V), utolsó etetés ideje, előzetes vérvizsgálat eredménye
+* Vizit dátuma, kezelőorvos neve.
+B) Előzmények és indikáció (Anamnézis)
+* Fő panasz: pl. bűzös lehelet (halitosis), fogkő, nyálzás, táplálási nehézség, fájdalom jelzése.
+* Otthoni szájhigiénia: fogmosás gyakorisága, táp típusa.
+C) Fogászati státusz (Odontogram / Fogképlet)
+A kutyák (42 fog) és macskák (30 fog) teljes fogazatát szemléltető interaktív grafika Triadan-rendszer szerinti számozással. Minden egyes foghoz rögzíthető adatok:
+
+
+* Fogállapot / Kódok:
+   * 0 = Egészséges
+   * T = Fogkő (tartarus) – 1-3 fokozatban
+   * G = Gingivitis (ínygyulladás)
+   * PD = Periodontális betegség fokozata (PD1–PD4)
+   * Mob = Mobilitás (0–3 fokozat)
+   * Fur = Furkáció-veszteség (1–3 fokozat)
+   * FX = Fogtörés (korona/gyökér, pulznyitott vagy sem)
+   * RES = Macskáknál resorptív lézió (FORL / TR – 1–4 fokozat)
+   * M = Hiányzó fog (missing) vagy impaktált fog
+* Tasakmélység (mm): Szondázási adatok a fog 4-6 oldalán.
+* Kezelési terv / Végzett beavatkozás foganként: pl. ultrahangos fogtisztítás (U), gyökérkezelés (ENDO), extrakció (EXT).
+D) Beavatkozási és műtéti napló
+* Fájdalomcsillapítás és érzéstelenítés: helyi blokkok adatai.
+* Képalkotás: Digitális fogászati röntgen felvételek csatolási lehetősége.
+* Varratok típusa.
+E) Utókezelési terv és hazadobó lap
+* Gyógyszeres terápia: antibiotikum, fájdalomcsillapító, szájfertőtlenítő gél.
+* Táplálási javaslat a műtét utáni napokra.
+* Kontroll időpontja (pl. varratszedés 10-14 nap múlva).
+
+
+2. A Triadan-rendszer szerinti fogjelölési felület logikája
+A) Az Odontogram vizuális elrendezése
+* A képernyő központi eleme a felső (maxilla) és alsó (mandibula) állkapocs szimmetrikus, bal-jobb félre osztott vázlata.
+* Kvadránsok: 100-as (jobb felső), 200-as (bal felső), 300-as (bal alsó), 400-as (jobb alsó).
+* Minden fog egy különálló kártya:
+   * Alapállapot: zöld / semleges.
+   * Patológiás állapot: színkódolt (sárga a fogkő, piros a törött/kihúzandó).
+   * Koppintás: megnyitja az adott fog részletes adatlapját.
+   * Többszörös kijelölés: több fog egyidejű kijelölése csoportos műveletekhez.
+B) Gyorsbeviteli Panel (Quick Actions Toolbar) – "Kijelölés $\rightarrow$ Művelet"
+1. Az asszisztens kijelöli az érintett fogakat.
+2. Rákattint a gyorsbeviteli panel egy gombjára (pl. FX vagy T2), mire a rendszer azonnal hozzárendeli.
+* Diagnosztikai gombok: T (Fogkő), G (Ínygyulladás), PD (Periodontitis), FX (Törés), RES (Lézió), Mob (Mozgás), M (Hiányzó).
+* Terápiás gombok: U (Ultrahang), POL (Polírozás), EXT (Húzás), RX (Röntgen), ENDO (Gyökérkezelés).
+* Egyéb funkciók: Tasakmélység gyorsrögzítő (0–12 mm) és hangalapú diktálás (🎙️) az egyedi megjegyzésekhez.
+
+
+________________
+
+
+3. A Fogászati Kezelési Lap Képernyőjének Drótvázas (Wireframe) Elrendezése
++---------------------------------------------------------------------------------------------------------+
+| [LOGO] Páciens: Max (Kutya, Golden Retriever, 4 év, 32 kg) | ASA: II | Dátum: 2026.11.12 | [ Mentés / PDF ] |  
++---------------------------------------------------------------------------------------------------------+
+|                                                                                                         |
+|  [ FELSŐ ÁLLKAPOS (MAXILLA) ]                                                                           |
+|  Jobb (100)                                                                                  Bal (200)  |
+|  [109] [108] [107] [106] [---] [104] [103] [102] [101] | [201] [202] [203] [204] [---] [206] [207] [208] [209]  |
+|                                                                                                         |
+|  ======================================= VÁLASZTÓVONAL ================================================  | 
+|                                                                                                         |
+|  [ ALSÓ ÁLLKAPOS (MANDIBULA) ]                                                                          |
+|  Jobb (400)                                                                                  Bal (300)  |
+|  [411] [410] [409] [408] [407] [406] [---] [404] [403] [402] [401] | [301] [302] [303] [304] [---] [306] ...     |
+|                                                                                                         |
++-----------------------------------------------------+---------------------------------------------------+
+| 3. RÉSZLETEZŐ & TÁSAKOK (Aktív fog: 104)            | 4. GYORSBEVITELI ESZKÖZTÁR (Quick Actions)        |
+|                                                     |                                                   |
+| - Tasakmélység: [ M-3 ] [ B-4 ] [ D-2 ] mm          | [ T: Fogkő ]  [ G: Ínygyull. ]  [ PD: Periodont ] |
+| - Státusz: [FX-C: Koronatörés (pulznyitott)]        | [ FX: Törés ] [ RES: Lézió ]    [ Mob: Mozgás ]   |
+| - Beavatkozás: [ EXT-SURG (Sebészi extrakció) ]     |                                                   |
+| - Megjegyzés: [ 🎙️ Hangjegyzet rögzítése... ]      | [ U: Ultrahang ] [ POL: Polír ] [ EXT: Húzás ]    |
+|                                                     | [ RX: Röntgen ]  [ ENDO ]       [ M: Hiányzó ]    |
++-----------------------------------------------------+---------------------------------------------------+
+

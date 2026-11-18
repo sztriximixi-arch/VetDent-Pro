@@ -1,0 +1,6 @@
+{
+  "name": "VetDent Pro - Állatorvosi Fogászati Kezelési Lap",
+  "description": "Kisállat orvosi digitális fogászati kezelési lap Triadan-rendszerű odontogrammal, gyorsbeviteli eszköztárral, altatási és műtéti naplóval, valamint PDF exportálással és gazdi tájékoztató küldéssel.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
